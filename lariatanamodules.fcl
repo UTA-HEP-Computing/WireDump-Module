@@ -1,0 +1,83 @@
+#include "calorimetry.fcl"
+BEGIN_PROLOG
+
+lariat_anatree:
+{
+    module_type:              "AnaTreeT1034"
+    TriggerUtility:           "FragmentToDigit"
+    HitsModuleLabel:          "linecluster"
+    TrackModuleLabel:         "pmtrack"
+    CalorimetryModuleLabel:   "calo"
+    ParticleIDModuleLabel:    "pid"
+    ClusterModuleLabel:       "linecluster"
+    WCTrackLabel:             "wctrack"
+    TOFModuleLabel:	      "tof"
+    AGModuleLabel:            "agcounter"
+    G4ModuleLabel:            "largeant"
+    ShowerModuleLabel:        "showerreco"
+    SimChanModuleLabel:       "largeant"
+    MCShowerModuleLabel:      "mcreco"
+    CalorimetryAlg:           @local::standard_calorimetryalgmc
+    WC2TPCModuleLabel:	      "WC2TPCtrk"
+}
+
+lariat_mcanalysis:
+{
+    module_type:              "MCAnalysis"
+    TriggerUtility:           "FragmentToDigit"
+    HitsModuleLabel:          "linecluster"
+    TrackModuleLabel:         "pmtrack"
+    CalorimetryModuleLabel:   "calo"
+    ParticleIDModuleLabel:    "pid"
+    ClusterModuleLabel:       "linecluster"
+    G4ModuleLabel:            "largeant"
+    ShowerModuleLabel:        "showerreco"
+    MCShowerModuleLabel:      "mcreco"
+    CalorimetryAlg:          @local::standard_calorimetryalgmc
+    WC2TPCModuleLabel:	      "WC2TPCtrk"
+}
+
+<<<<<<< HEAD
+
+lariat_xsanalysis:
+{
+    module_type:              "XSAnalysis"
+    SourceLabel:              "SlicerInput"
+    WCTrackBuilderLabel:      "wctrack"
+    #TPCTrackBuilderLabel:     "pmtrack"
+    CalorimetryModuleLabel:   "calo"
+    NumEvents:                10
+    UpstreamEpsilon:          2.0
+    RecombinationFactor:      1.3
+    ThinSlabThickness:        0.4725 #in cm
+}
+
+lariat_purityonline:
+{
+    module_type:              "PurityOnlineT1034"
+    HitsModuleLabel:          "linecluster"
+    TrackModuleLabel:         "pmtrack"
+    ClusterModuleLabel:       "linecluster"
+    ChargeCut:                6000.                   #####   uppercut on hit charge  Run1 Value: 2000
+    SamplingTime:             0.128                   #####   TPC sampling rate
+    PreSampling:              189                     #####   = 24.2 mus of pre-sampling
+    Variable:                 [1000., 1000., 5000.]   #####   Starting values for minimization. Run1 values: [1000., 1000., 2000.]
+    Step:                     [1., 1., 1.]            #####   Minimization Steps
+    Verbose:                  false                   #####   Set how much I want to print on screen
+}
+
+lariat_anatree.CalorimetryAlg.CalAreaConstants: [0.0068,0.0153]
+lariat_mcanalysis.CalorimetryAlg.CalAreaConstants: [0.0068,0.0153]
+=======
+lariat_wiredump:
+{
+   module_type:		"WireDump"
+   DetSimModuleLabel: 	"daq"
+   #GenieGenModuleLabel: "generator"
+   GenieGenModuleLabel: "largeant"
+
+
+}
+
+>>>>>>> e7d14098bbae60a86789367b99accfc48b34494e
+END_PROLOG
